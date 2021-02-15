@@ -1,0 +1,19 @@
+---
+- name: Ensure apt cache is there
+  apt:
+    update_cache: yes
+- name: Install taskfile.dev
+  include_role:
+    name: fubarhouse.golang
+  vars:
+    go_get:
+    - name: task
+      url: github.com/go-task/task
+- name: Copy a taskfile.dev binary to the proper place 
+  copy:
+    src: /root/go/bin/task
+    dest: /usr/local/bin/task
+    remote_src: yes
+    mode: a+rx
+
+
